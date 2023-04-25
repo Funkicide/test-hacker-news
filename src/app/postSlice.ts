@@ -10,7 +10,7 @@ export type PostItem =
       deleted?: true;
       type: 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
       by?: string;
-      time?: number;
+      time: number;
       text?: HTMLElement;
       dead?: true;
       parent?: number;

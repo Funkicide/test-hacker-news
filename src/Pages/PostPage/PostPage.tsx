@@ -4,6 +4,7 @@ import { commentsSelectors, fetchComments } from '../../app/commentsSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { postSelectors, fetchPost } from '../../app/postSlice';
 import Button from '../../components/Button';
+import TimeAgo from '../../components/TimeAgo';
 import Comment from './components/Comment';
 
 const PostPage = () => {
@@ -25,6 +26,8 @@ const PostPage = () => {
     dispatch(fetchPost(post.id));
   };
 
+  const timestamp = new Date(post.time * 1000).toISOString();
+
   return (
     <main>
       <div
@@ -39,13 +42,13 @@ const PostPage = () => {
         <Button text="Refresh comments" onClick={handleRefreshComments} />
       </div>
       <article>
-        <p>
+        <h3>
           <a href={post.url}>{post.title}</a>
-        </p>
-        <p>
-          <strong>By: {post.by}</strong>
-        </p>
-        <p>{new Date(post.time * 1000).toLocaleString('ru')}</p>
+        </h3>
+        <div>
+          <span>By {post.by}</span>
+          <TimeAgo timestamp={timestamp} />
+        </div>
         <p>{`${post.descendants} comments`}</p>
       </article>
       {comments &&

@@ -4,9 +4,9 @@ import './Layout.css';
 const Layout = () => {
   return (
     <>
-      <nav>
+      <header>
         <h1>Hacker News</h1>
-      </nav>
+      </header>
 
       <Outlet />
     </>
