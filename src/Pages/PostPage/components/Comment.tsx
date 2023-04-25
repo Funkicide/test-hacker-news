@@ -36,7 +36,7 @@ const Comment = ({
         <TimeAgo timestamp={timestamp} />
       </div>
       {type === 'parent' && comment.kids && (
-        <Button text="View all" onClick={handleClick} />
+        <Button onClick={handleClick}>View all</Button>
       )}
       {nestedComments}
     </article>

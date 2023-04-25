@@ -25,7 +25,7 @@ const Post = ({ post }: { post: PostItem }) => {
         <TimeAgo timestamp={timestamp} />
       </div>
       <p>{post.score} points</p>
-      <Button text="Read more" onClick={handleClick(post)} />
+      <Button onClick={handleClick(post)}>Read more</Button>
     </article>
   );
 };

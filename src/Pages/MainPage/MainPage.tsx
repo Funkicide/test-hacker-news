@@ -31,7 +31,7 @@ const MainPage = () => {
     <div>Loading...</div>
   ) : (
     <main>
-      <Button text="Refresh news" onClick={handlePageRefresh} />
+      <Button onClick={handlePageRefresh}>Refresh news</Button>
       {posts.map((post) => (
         <Post key={post.id.toString()} post={post} />
       ))}

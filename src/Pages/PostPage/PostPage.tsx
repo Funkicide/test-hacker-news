@@ -38,8 +38,8 @@ const PostPage = () => {
           padding: '1rem 0 1rem 0',
         }}
       >
-        <Button text="Return to main page" onClick={handleReturnToMain} />
-        <Button text="Refresh comments" onClick={handleRefreshComments} />
+        <Button onClick={handleReturnToMain}>Return to main page</Button>
+        <Button onClick={handleRefreshComments}>Refresh comments</Button>
       </div>
       <article>
         <h3>

@@ -1,7 +1,9 @@
-const Button = ({ text, onClick }: { text: string; onClick: () => void }) => {
+import React from 'react';
+
+const Button = ({ onClick, children }: React.ComponentProps<'button'>) => {
   return (
     <button onClick={onClick} type="button">
-      {text}
+      {children}
     </button>
   );
 };
