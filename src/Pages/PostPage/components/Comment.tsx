@@ -6,6 +6,7 @@ import {
 import { useAppDispatch } from '../../../app/hooks';
 import Button from '../../../components/Button';
 import TimeAgo from '../../../components/TimeAgo';
+import getTimestamp from '../../../utils';
 
 const Comment = ({
   type,
@@ -21,7 +22,7 @@ const Comment = ({
     dispatch(fetchNestedComments(comment.kids));
   };
 
-  const timestamp = new Date(comment.time * 1000).toISOString();
+  const timestamp = getTimestamp(comment.time);
 
   const className = type === 'child' ? 'child' : undefined;
 

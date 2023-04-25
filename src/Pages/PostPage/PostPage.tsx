@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { postSelectors, fetchPost } from '../../app/postSlice';
 import Button from '../../components/Button';
 import TimeAgo from '../../components/TimeAgo';
+import getTimestamp from '../../utils';
 import Comment from './components/Comment';
 
 const PostPage = () => {
@@ -26,7 +27,7 @@ const PostPage = () => {
     dispatch(fetchPost(post.id));
   };
 
-  const timestamp = new Date(post.time * 1000).toISOString();
+  const timestamp = getTimestamp(post.time);
 
   return (
     <main>

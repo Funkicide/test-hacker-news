@@ -5,6 +5,7 @@ import TimeAgo from '../../../components/TimeAgo';
 
 import { addPost, PostItem } from '../../../app/postSlice';
 import './Post.module.css';
+import getTimestamp from '../../../utils';
 
 const Post = ({ post }: { post: PostItem }) => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Post = ({ post }: { post: PostItem }) => {
     navigate(`/${item.id}`);
   };
 
-  const timestamp = new Date(post.time * 1000).toISOString();
+  const timestamp = getTimestamp(post.time);
 
   return (
     <article key={post.id.toString()}>
