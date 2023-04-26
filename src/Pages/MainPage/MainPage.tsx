@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchPosts, postsSelectors } from '../../app/postsSlice';
 import Button from '../../components/Button';
+import SkeletonPost from '../../components/skeletons/SkeletonPost';
 
 import Post from './components/Post';
 
@@ -26,14 +27,21 @@ const MainPage = () => {
     dispatch(fetchPosts());
   };
 
-  return loadingStatus === 'pending' ? (
-    <div>Loading...</div>
-  ) : (
+  const content =
+    loadingStatus === 'pending' ? (
+      [...Array(10).keys()].map((i) => <SkeletonPost key={i} />)
+    ) : (
+      <main>
+        {posts.map((post) => (
+          <Post key={post.id.toString()} post={post} />
+        ))}
+      </main>
+    );
+
+  return (
     <main>
       <Button onClick={handlePageRefresh}>Refresh news</Button>
-      {posts.map((post) => (
-        <Post key={post.id.toString()} post={post} />
-      ))}
+      {content}
     </main>
   );
 };

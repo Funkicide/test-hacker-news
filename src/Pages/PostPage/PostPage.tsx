@@ -1,19 +1,25 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { commentsSelectors, fetchComments } from '../../app/commentsSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { postSelectors, fetchPost } from '../../app/postSlice';
+
 import Button from '../../components/Button';
-import TimeAgo from '../../components/TimeAgo';
-import getTimestamp from '../../utils';
+import SkeletonComment from '../../components/skeletons/SkeletonComment';
 import Comment from './components/Comment';
+import PostWithComments from './components/PostWithComments';
 
 const PostPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const post = useAppSelector(postSelectors.selectPost);
   const postKids = useAppSelector(postSelectors.selectKids);
+  const postStatus = useAppSelector(postSelectors.selectLoadingStatus);
+
   const comments = useAppSelector(commentsSelectors.selectAll);
+  const commentsStatus = useAppSelector(commentsSelectors.selectLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchComments(postKids));
@@ -27,9 +33,14 @@ const PostPage = () => {
     dispatch(fetchPost(post.id));
   };
 
-  const timestamp = getTimestamp(post.time);
+  const isLoading = postStatus === 'pending' || commentsStatus === 'pending';
 
-  const commentCountComponent = <p>{`${post.descendants} comments`}</p>;
+  const commentsContent = isLoading
+    ? Object.values(comments).map(({ id }) => <SkeletonComment key={id} />)
+    : comments &&
+      Object.values(comments).map((comment) => (
+        <Comment key={comment.id.toString()} comment={comment} type="parent" />
+      ));
 
   return (
     <main>
@@ -37,24 +48,8 @@ const PostPage = () => {
         <Button onClick={handleReturnToMain}>Return to main page</Button>
         <Button onClick={handleRefreshComments}>Refresh comments</Button>
       </div>
-      <article className="post">
-        <h3>
-          <a href={post.url}>{post.title}</a>
-        </h3>
-        <p className="credits">
-          <span>By {post.by}</span>
-          <TimeAgo timestamp={timestamp} />
-        </p>
-        {!!post.descendants && commentCountComponent}
-      </article>
-      {comments &&
-        Object.values(comments).map((comment) => (
-          <Comment
-            key={comment.id.toString()}
-            comment={comment}
-            type="parent"
-          />
-        ))}
+      <PostWithComments post={post} />
+      {commentsContent}
     </main>
   );
 };
