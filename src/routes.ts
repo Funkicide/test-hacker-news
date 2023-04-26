@@ -1,7 +1,7 @@
 export const API_PATH = 'https://hacker-news.firebaseio.com/v0';
 
 const routes = {
-  dataPath: () => '/topstories.json',
+  dataPath: () => '/beststories.json',
   itemPath: (id: number) => ['/item', `${id}.json`].join('/'),
 };
 
