@@ -26,7 +26,7 @@ const Comment = ({
 
   const timestamp = getTimestamp(comment.time);
 
-  const className = type === 'child' ? 'child' : undefined;
+  const className = type === 'child' ? 'comment child' : 'comment';
 
   const nestedComments = Object.values(comment.children ?? []).map((child) => {
     return <Comment key={child.id} comment={child} type="child" />;
@@ -38,13 +38,13 @@ const Comment = ({
 
   return (
     <article className={className}>
-      <div>
+      <p className="credits">
         <span>By {comment.by}</span>
         <TimeAgo timestamp={timestamp} />
-      </div>
+      </p>
       {comment.text && parse(comment.text)}
       {type === 'parent' && comment.kids && (
-        <Button onClick={handleClick}>View all</Button>
+        <Button onClick={handleClick}>Expand</Button>
       )}
       {nestedComments}
     </article>

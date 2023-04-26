@@ -29,28 +29,23 @@ const PostPage = () => {
 
   const timestamp = getTimestamp(post.time);
 
+  const commentCountComponent = <p>{`${post.descendants} comments`}</p>;
+
   return (
     <main>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-          padding: '1rem 0 1rem 0',
-        }}
-      >
+      <div className="buttonContainer">
         <Button onClick={handleReturnToMain}>Return to main page</Button>
         <Button onClick={handleRefreshComments}>Refresh comments</Button>
       </div>
-      <article>
+      <article className="post">
         <h3>
           <a href={post.url}>{post.title}</a>
         </h3>
-        <div>
+        <p className="credits">
           <span>By {post.by}</span>
           <TimeAgo timestamp={timestamp} />
-        </div>
-        <p>{`${post.descendants} comments`}</p>
+        </p>
+        {!!post.descendants && commentCountComponent}
       </article>
       {comments &&
         Object.values(comments).map((comment) => (

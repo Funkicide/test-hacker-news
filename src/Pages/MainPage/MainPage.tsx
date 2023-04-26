@@ -5,7 +5,6 @@ import { fetchPosts, postsSelectors } from '../../app/postsSlice';
 import Button from '../../components/Button';
 
 import Post from './components/Post';
-import './MainPage.module.css';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
