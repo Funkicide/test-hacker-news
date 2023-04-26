@@ -11,7 +11,7 @@ export type PostItem =
       type: 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
       by?: string;
       time: number;
-      text?: HTMLElement;
+      text?: string;
       dead?: true;
       parent?: number;
       poll?: number;

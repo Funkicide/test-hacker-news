@@ -1,3 +1,5 @@
+import parse from 'html-react-parser';
+
 import {
   CommentItem,
   fetchNestedComments,
@@ -30,12 +32,17 @@ const Comment = ({
     return <Comment key={child.id} comment={child} type="child" />;
   });
 
+  if (comment.dead || (comment.deleted && !comment.kids)) {
+    return null;
+  }
+
   return (
     <article className={className}>
       <div>
         <span>By {comment.by}</span>
         <TimeAgo timestamp={timestamp} />
       </div>
+      {comment.text && parse(comment.text)}
       {type === 'parent' && comment.kids && (
         <Button onClick={handleClick}>View all</Button>
       )}

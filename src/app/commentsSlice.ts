@@ -12,7 +12,7 @@ export type CommentItem =
       type: 'comment';
       by: string;
       time: number;
-      text: HTMLElement;
+      text: string;
       dead?: true;
       parent: number;
       kids?: number[];
