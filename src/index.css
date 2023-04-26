@@ -54,6 +54,7 @@ a:hover {
 .child {
   margin-left: 1rem;
   margin-top: 0.5rem;
+  width: 90%;
 }
 
 body {
